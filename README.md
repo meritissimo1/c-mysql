@@ -4,6 +4,14 @@ Literalmente, meu primeiro programa em C que faz algo "mais ou menos" interessan
 
 ## Build
 
+Para construir a aplicação será necessário instalar o pacote de desenvolvimento do MySQL, no meu caso `libmariadb-devel`.
+
 ```bash
-gcc -I/usr/include/mysql/ -lmysqlclient main.c -o bin/main
+make
+```
+
+## Run
+
+```bash
+bin/main
 ```
