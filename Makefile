@@ -1,7 +1,11 @@
-CC			= gcc
+CC		= gcc
 CFLAGS		= -Wall -I/usr/include/mysql/
 LDFLAGS		= -lmysqlclient
+OBJFILES	= database/db_mysql.o main.o
+TARGET		= bin/main
 
-main : main.c
+all : $(TARGET)
+
+$(TARGET) : $(OBJFILES)
 	@if [ ! -d "bin" ]; then  mkdir bin; fi
-	$(CC) $(CFLAGS) -o bin/$@ $< $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
