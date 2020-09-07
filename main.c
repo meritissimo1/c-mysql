@@ -1,18 +1,51 @@
 # include <stdio.h>
-# include <mysql.h>
-
+#include <stdlib.h>
 # include "main.h"
 
 MYSQL mysql;
+
+
+void load_mysql_db(MYSQL *mysql) 
+{
+    FILE *fp;
+    fp = fopen(SQL_FILE, "r");
+    ssize_t read;
+    char * line = NULL;
+    size_t len = 0;
+    
+    if (fp == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+    
+    // Definindo default database
+    if (mysql_select_db(mysql, BASE))
+    {
+        while ((read = getline(&line, &len, fp)) != -1)
+        {
+            if (mysql_query(mysql, line))
+            {
+                printf("Failed Query: %s", line);
+                printf("Cause: %s\n", mysql_error(mysql));
+                exit(1);
+            }   
+        }
+    
+        fclose(fp);
+    }
+}
+
 
 int main() {
 
 	int option;
 	mysql_init(&mysql);
-	if(!mysql_real_connect(&mysql, HOST, USER, PASS, BASE, 0, NULL, 0)) {
+	if(!mysql_real_connect(&mysql, HOST, USER, PASS, NULL, 0, NULL, 0)) {
 		printf("Falha ao se conectar com a base de dados: Erro: %s\n", mysql_error(&mysql));
 		return 1;
 	}
+	
+	load_mysql_db(&mysql);
 
 	while(1) {
 
