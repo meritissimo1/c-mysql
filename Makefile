@@ -9,3 +9,6 @@ all : $(TARGET)
 $(TARGET) : $(OBJFILES)
 	@if [ ! -d "bin" ]; then  mkdir bin; fi
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
+
+clean : 
+	rm -f $(OBJFILES) $(TARGET) *~
