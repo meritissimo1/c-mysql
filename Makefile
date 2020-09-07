@@ -3,4 +3,5 @@ CFLAGS		= -Wall -I/usr/include/mysql/
 LDFLAGS		= -lmysqlclient
 
 main : main.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -o bin/$@ $<
+	@if [ ! -d "bin" ]; then  mkdir bin; fi
+	$(CC) $(CFLAGS) -o bin/$@ $< $(LDFLAGS)
