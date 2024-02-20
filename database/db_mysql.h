@@ -11,5 +11,5 @@
 
 MYSQL mysql;
 
-void load_mysql_db(); 
-void search();
+MYSQL*	load_mysql_db(); 
+void	search(MYSQL *mysql);

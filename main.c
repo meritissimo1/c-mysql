@@ -2,9 +2,10 @@
 
 int main() 
 {
-	int option;
-	
-	load_mysql_db();
+	int	option;
+	MYSQL	*mysql;
+
+	mysql = load_mysql_db();
 
 	while (1) {
 
@@ -20,10 +21,12 @@ int main()
 
 		switch(option) {
 			case SAIR:
-				printf("Saindo...");
-				return 0;
+				printf("Saindo... até a próxima o/\n *vlw, hector* "); // ainda vem muito pela frente.
+				mysql_close(mysql);
+				return (0);
 			case BUSCAR:
-				search(&mysql);
+				search(mysql);
+				break;
 			case INSERIR:
 				break;
 			case ATUALIZAR:
@@ -35,6 +38,6 @@ int main()
 		}
 
 	}
-
-	return 0;
+	mysql_close(mysql);
+	return (0);
 }

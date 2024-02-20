@@ -1,5 +1,5 @@
 CC		= gcc
-CFLAGS		= -Wall -I/usr/include/mysql/
+CFLAGS		= -g -Wall -Wextra -Werror -I/usr/include/mysql/
 LDFLAGS		= -lmysqlclient
 OBJFILES	= database/db_mysql.o main.o
 TARGET		= bin/main
@@ -12,3 +12,9 @@ $(TARGET) : $(OBJFILES)
 
 clean : 
 	rm -f $(OBJFILES) $(TARGET) *~
+
+re: clean all
+
+debug:
+	gdb --tui $(TARGET)
+
